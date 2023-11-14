@@ -105,7 +105,7 @@ const Chat = () => {
 
     return (
         <>
-            <Card className="h-full pb-5 bg-white">
+            <Card className="h-full pb-5 bg-white rounded-[8px]">
                 <CardHeader className="flex flex-row ">
                     <div className="flex items-center space-x-4">
                         <div className="flex">
