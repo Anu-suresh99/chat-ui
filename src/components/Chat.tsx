@@ -1,8 +1,10 @@
 'use client'
 import * as React from "react"
+import { useState } from "react"
 import { Check, Plus, Send } from "lucide-react"
-
+import axios from 'axios'
 import { cn } from "@/lib/utils"
+import { HiGif } from 'react-icons/hi2'
 import {
     Avatar,
     AvatarFallback,
@@ -73,6 +75,7 @@ type User = (typeof users)[number]
 const Chat = () => {
     const [open, setOpen] = React.useState(false)
     const [selectedUsers, setSelectedUsers] = React.useState<User[]>([])
+    const [gifUrl, setGifUrl] = useState('');
 
     const [messages, setMessages] = React.useState([
         {
@@ -86,6 +89,19 @@ const Chat = () => {
     const handleEmojiClick = (emoji: any) => {
         setInput((prevInput) => prevInput + emoji);
     }
+
+    const handleGifClick = async () => {
+        try {
+            const response = await axios.get(
+                `https://api.giphy.com/v1/gifs/search?q=hi&api_key=YOUR_GIPHY_API_KEY&limit=1`
+            );
+            const gifData = response.data.data[0];
+            const gifUrl = gifData.images.downsized.url;
+            setGifUrl(gifUrl);
+        } catch (error) {
+            console.error('Error fetching GIF:', error);
+        }
+    };
 
     return (
         <>
@@ -178,6 +194,13 @@ const Chat = () => {
                             value={input}
                             onChange={(event) => setInput(event.target.value)}
                         />
+                        <Button type="button" size="icon" onClick={handleGifClick}>
+                            <HiGif className="h-4 w-4" />
+                            <span className="sr-only">Send GIF</span>
+                        </Button>
+                        {gifUrl && (
+                            <img src={gifUrl} alt="GIF" className="h-12 w-12" />
+                        )}
                         <Button type="button" size="icon">
                             <EmojiPicker onEmojiClick={handleEmojiClick} />
                             <span className="sr-only">Open Emoji Picker</span>
