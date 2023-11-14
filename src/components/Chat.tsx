@@ -38,6 +38,7 @@ import {
     TooltipProvider,
     TooltipTrigger,
 } from '../components/ui/tooltip'
+import EmojiPicker from 'emoji-picker-react'
 
 const users = [
     {
@@ -81,6 +82,10 @@ const Chat = () => {
     ])
     const [input, setInput] = React.useState("")
     const inputLength = input.trim().length
+
+    const handleEmojiClick = (emoji: any) => {
+        setInput((prevInput) => prevInput + emoji);
+    }
 
     return (
         <>
@@ -173,6 +178,10 @@ const Chat = () => {
                             value={input}
                             onChange={(event) => setInput(event.target.value)}
                         />
+                        <Button type="button" size="icon">
+                            <EmojiPicker onEmojiClick={handleEmojiClick} />
+                            <span className="sr-only">Open Emoji Picker</span>
+                        </Button>
                         <Button type="submit" size="icon" disabled={inputLength === 0}>
                             <Send className="h-4 w-4" />
                             <span className="sr-only">Send</span>
