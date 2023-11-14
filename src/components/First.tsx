@@ -8,7 +8,7 @@ const First = () => {
             <div className=' w-[750px] border-r-2 border-gray-400 mt-5 mb-5 '>
                 <Left />
             </div>
-            <div className='w-full '>
+            <div className='w-screen mt-8 h-[930px] mr-5 ml-5'>
                 <Chat />
             </div>
         </div>

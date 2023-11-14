@@ -93,20 +93,20 @@ const Chat = () => {
     const handleGifClick = async () => {
         try {
             const response = await axios.get(
-                `https://api.giphy.com/v1/gifs/search?q=hi&api_key=YOUR_GIPHY_API_KEY&limit=1`
+                `https://api.giphy.com/v1/gifs/search?q=hi&api_key=jSlLrqTooqLvxaTRldj27jmplyvVXK85&limit=1`
             );
             const gifData = response.data.data[0];
             const gifUrl = gifData.images.downsized.url;
             setGifUrl(gifUrl);
         } catch (error) {
-            console.error('Error fetching GIF:', error);
+            console.error('Error fetching bbnGIF:', error);
         }
     };
 
     return (
         <>
-            <Card>
-                <CardHeader className="flex flex-row items-center">
+            <Card className="h-full pb-5 bg-white">
+                <CardHeader className="flex flex-row ">
                     <div className="flex items-center space-x-4">
                         <div className="flex">
                             {selectedUsers.length > 0 && (
@@ -184,12 +184,12 @@ const Chat = () => {
                             ])
                             setInput("")
                         }}
-                        className="flex w-full items-center space-x-2"
+                        className="flex w-full items-center space-x-2  mt-[60%]"
                     >
                         <Input
                             id="message"
                             placeholder="Type your message..."
-                            className="flex-1"
+                            className="flex-1 bg-zinc-800 text-white "
                             autoComplete="off"
                             value={input}
                             onChange={(event) => setInput(event.target.value)}
